@@ -61,7 +61,7 @@ if st.button("Submit"):
     # Send context + query to OpenAI
     response = client.chat.completions.create(
         messages=message,
-        model="gpt-4-0125-preview",
+        model="gpt-3.5-turbo",
     )
 
     # Extracting and displaying the response
