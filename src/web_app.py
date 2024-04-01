@@ -1,21 +1,16 @@
 import streamlit as st
-from dotenv import load_dotenv
 import os
 import cohere
 from pinecone import Pinecone
 from openai import OpenAI
 
-# Load environment variables
-load_dotenv()
-cohere_api_key = os.getenv("COHERE_API_KEY")
-pinecone_api_key = os.getenv("PINECONE_API_KEY")
-openai_api_key = os.getenv("OPENAI_API_KEY")
+
 
 # Initialize Cohere, Pinecone, and OpenAI
-co = cohere.Client(cohere_api_key)
-pc = Pinecone(api_key=pinecone_api_key)
+co = cohere.Client(st.secrets["COHERE_API_KEY"])
+pc = Pinecone(api_key=st.secrets["PINECONE_API_KEY"])
 index = pc.Index("war-and-peace-index")
-client = OpenAI(api_key=openai_api_key)
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Streamlit UI Setup
 st.title("ChatGPT-like Clone with War and Peace")
