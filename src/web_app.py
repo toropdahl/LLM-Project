@@ -59,13 +59,17 @@ if st.button("Submit"):
     ]
 
     # Send context + query to OpenAI
-    response = client.chat.completions.create(
-        messages=message,
-        model="gpt-3.5-turbo",
-    )
-
+    try:
+        response = client.chat.completions.create(
+            messages=message,
+            model="gpt-3.5-turbo",
+        )
+        response_content = response.choices[0].message.content
+        st.session_state.messages.append({"role": "user", "content": user_query})
+        st.session_state.messages.append({"role": "assistant", "content": response_content})
+        st.experimental_rerun()
+    except:
+        st.session_state.messages.append({"role": "assistant", "content": "API token exhausted. Please try again later."})
+        st.experimental_rerun()
     # Extracting and displaying the response
-    response_content = response.choices[0].message.content
-    st.session_state.messages.append({"role": "user", "content": user_query})
-    st.session_state.messages.append({"role": "assistant", "content": response_content})
-    st.experimental_rerun()
+    

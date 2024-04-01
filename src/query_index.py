@@ -71,7 +71,7 @@ if __name__ == "__main__":
     ]
     response = client.chat.completions.create(
         messages=message,
-        model="gpt-4-0125-preview",
+        model="gpt-3.5-turbo",
     )
     # Extracting the content from the response
     response_content = response.choices[0].message.content
