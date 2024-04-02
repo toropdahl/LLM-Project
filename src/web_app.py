@@ -25,7 +25,7 @@ for message in st.session_state.messages:
         st.write(f"{message['role'].capitalize()}: {message['content']}")
 
 # User input
-user_query = st.text_input("Ask me anything about 'War and Peace':", key="user_query")
+user_query = st.text_input("Ask me anything about the book 'War and Peace':", key="user_query")
 
 # Function to clean up text
 def clean_up_text(text):
@@ -64,12 +64,13 @@ if st.button("Submit"):
             messages=message,
             model="gpt-3.5-turbo",
         )
+        # extract the response, and append the user query and response to the session state
         response_content = response.choices[0].message.content
         st.session_state.messages.append({"role": "user", "content": user_query})
         st.session_state.messages.append({"role": "assistant", "content": response_content})
         st.experimental_rerun()
     except:
+        # If the API token is exhausted, display a message and rerun the app
         st.session_state.messages.append({"role": "assistant", "content": "API token exhausted. Please try again later."})
         st.experimental_rerun()
-    # Extracting and displaying the response
     
