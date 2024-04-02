@@ -1,9 +1,7 @@
 import os
 from dotenv import load_dotenv
-from pinecone import Pinecone, ServerlessSpec
+from pinecone import Pinecone
 import cohere
-import numpy as np
-import itertools
 
 
 
